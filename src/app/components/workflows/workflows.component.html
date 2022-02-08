@@ -1,0 +1,91 @@
+<div class="container mt-4">
+
+  <div style="text-align: center" class="mt-5 mb-5">
+    <button class="btn btn-warning" (click)="openModal(template)">Add new Workflow</button>
+  </div>
+  
+
+  <div class="col-lg col-sm-12 col-xs-12">
+    
+    <table class="table table-striped">
+      
+      <thead>
+        <tr class="bg-info text-light">
+          <td>ID</td>
+          <td>Name</td>
+          <td>View Images</td>
+          <td>View Statuses</td>
+          <td>Delete</td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor = "let workflow of workflows">
+          <td>{{workflow.id}}</td>
+          <td>{{workflow.name}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="handleViewImages(workflow.id)">Images</button>
+          </td>
+          <td>
+            <button class="btn btn-success" (click)="handleViewStatuses(workflow.id)">Statuses</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="handleDeleteWorkflow(workflow.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<ng-template #template>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create new workflow</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+
+
+  <div class="modal-body">
+    <form [formGroup]="formdata" (ngSubmit) = "onClickSubmit(formdata.value)">
+      <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" placeholder="Enter a name for your workflow" name="name" formControlName="name">
+      </div>
+
+      <div class="form-group">
+          <label for="status1">Status1</label>
+          <input type="text" class="form-control" placeholder="Enter a name for your 1st status" name="status1" formControlName="status1">
+      </div>
+
+      <div class="form-group">
+          <label for="status2">Status2</label>
+          <input type="text" class="form-control" placeholder="Enter a name for your 2nd status" name="status2" formControlName="status2">
+      </div>
+
+      <div class="form-group">
+          <label for="status3">Status3</label>
+          <input type="text" class="form-control" placeholder="Enter a name for your 3rd status" name="status3" formControlName="status3">
+      </div>
+
+      
+      <div style="text-align: center" class="mt-5 mb-5">
+          <input type = "submit" class = "btn btn-primary" value = "Save">
+      </div>    
+
+      </form>
+  </div>
+
+</ng-template>
